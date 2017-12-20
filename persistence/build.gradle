@@ -1,0 +1,9 @@
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    testCompile 'org.springframework:spring-test'
+    testCompile 'org.hamcrest:hamcrest-junit'
+    testCompile 'junit:junit'
+    testCompile 'org.hsqldb:hsqldb'
+
+}

@@ -1,0 +1,83 @@
+repositories {
+//    maven { url 'http://artifactory.rgs.ru:8081/artifactory/remote-repos' }
+//    maven { url "http://artifactory.rgs.ru:8081/artifactory/jcenter-cache" }
+//    maven { url 'http://artifactory.rgs.ru:8081/artifactory/gradle' }
+    jcenter()
+}
+
+buildscript {
+    ext {
+        springBootVersion = '1.5.8.RELEASE'
+    }
+
+    repositories {
+//        maven { url "http://artifactory.rgs.ru:8081/artifactory/gradle" }
+//        maven { url "http://artifactory.rgs.ru:8081/artifactory/remote-repos" }
+//        maven { url "http://artifactory.rgs.ru:8081/artifactory/third-party-proprietary" }
+        jcenter()
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "com.palantir.gradle.docker:gradle-docker:0.13.0"
+    }
+}
+
+subprojects {
+    def springBomVersion = "Brussels-SR5"
+    def springBootVersion = "1.5.9.RELEASE"
+//    def springCloudBomVersion = "Dalston.SR4"
+
+    def logbackVersion = "1.2.3"
+    def jacksonVersion = "2.8.9"
+
+    ext {
+
+    }
+
+    apply plugin: "java"
+    apply plugin: "io.spring.dependency-management"
+
+    repositories {
+//            maven { url 'http://artifactory.rgs.ru:8081/artifactory/remote-repos' }
+//            maven { url "http://artifactory.rgs.ru:8081/artifactory/jcenter-cache" }
+//            maven { url 'http://artifactory.rgs.ru:8081/artifactory/gradle' }
+        jcenter()
+    }
+
+
+    dependencyManagement {
+        imports {
+            mavenBom "io.spring.platform:platform-bom:${springBomVersion}"
+            mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+        }
+
+        dependencies {
+            dependency "commons-io:commons-io:2.5"
+            dependency "org.apache.commons:commons-lang3:3.5"
+
+            dependency "org.projectlombok:lombok:1.16.18"
+
+            dependency "ch.qos.logback:logback-classic:${logbackVersion}"
+            dependency "ch.qos.logback:logback-core:${logbackVersion}"
+            dependency "org.slf4j:jcl-over-slf4j:1.7.25"
+
+            dependency "commons-codec:commons-codec:1.10"
+            dependency "commons-io:commons-io:2.5"
+
+            dependency "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+            dependency "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}"
+
+            dependency "'com.h2database:h2:1.4.194"
+
+            dependency "junit:junit:4.12"
+            dependency "org.hamcrest:hamcrest-junit:2.0.0.0"
+        }
+    }
+
+    dependencies {
+        compileOnly "org.projectlombok:lombok" // compilation-level, non-transitive
+        testCompile "org.projectlombok:lombok" // test-only
+    }
+
+}

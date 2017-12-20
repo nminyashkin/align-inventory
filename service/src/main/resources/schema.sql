@@ -1,0 +1,12 @@
+-- DROP SCHEMA align IF EXISTS;
+--
+-- CREATE SCHEMA align;
+
+DROP TABLE STOCK IF EXISTS;
+
+CREATE TABLE STOCK (
+  id       INTEGER,
+  brand    VARCHAR(50),
+  name     VARCHAR(50),
+  quantity INTEGER
+)
