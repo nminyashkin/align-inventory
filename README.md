@@ -1,12 +1,13 @@
 # align-inventory
 
 ## running
-To run service, execute "./gradlew -i clean service:bootRun" in project root directory
-Service runs on port 9000
+To run service, execute "./gradlew -i clean service:bootRun" in project root directory. Service runs on port 9000
 
 ## authentication
 Service requires "HTTP basic" authentication
+
 Admin user: admin/admin
+
 Ordinal user: user/user
 
 ## remarks
