@@ -53,22 +53,16 @@ subprojects {
         }
 
         dependencies {
-            dependency "commons-io:commons-io:2.5"
+//            dependency "commons-io:commons-io:2.5"
             dependency "org.apache.commons:commons-lang3:3.5"
 
             dependency "org.projectlombok:lombok:1.16.18"
 
-            dependency "ch.qos.logback:logback-classic:${logbackVersion}"
-            dependency "ch.qos.logback:logback-core:${logbackVersion}"
-            dependency "org.slf4j:jcl-over-slf4j:1.7.25"
+//            dependency "ch.qos.logback:logback-classic:${logbackVersion}"
+//            dependency "ch.qos.logback:logback-core:${logbackVersion}"
+//            dependency "org.slf4j:jcl-over-slf4j:1.7.25"
 
-            dependency "commons-codec:commons-codec:1.10"
-            dependency "commons-io:commons-io:2.5"
-
-            dependency "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
-            dependency "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}"
-
-            dependency "'com.h2database:h2:1.4.194"
+            dependency "com.h2database:h2:1.4.194"
 
             dependency "junit:junit:4.12"
             dependency "org.hamcrest:hamcrest-junit:2.0.0.0"
