@@ -7,7 +7,7 @@ import lombok.Data;
  */
 
 @Data
-public class InventoryResponseDTO /*implements Serializable*/ {
+public class InventoryResponseDTO {
 
     private String message;
 

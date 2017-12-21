@@ -6,8 +6,17 @@ DROP TABLE STOCK IF EXISTS;
 
 -- we declare id field as INTEGER (not LONGINT) as expecting that number of stocks will never exceed 2^31
 CREATE TABLE STOCK (
-  id       INTEGER AUTO_INCREMENT,
-  brand    VARCHAR(50),
-  name     VARCHAR(50),
-  quantity INTEGER
-)
+  ID        INTEGER AUTO_INCREMENT,
+  BRAND     VARCHAR(50),
+  NAME      VARCHAR(50),
+  QUANTITY  INTEGER
+);
+
+DROP TABLE PRINCIPAL IF EXISTS;
+
+CREATE TABLE PRINCIPAL (
+  USER      VARCHAR(20),
+  PASSWORD  VARCHAR(20),
+  IS_ADMIN  BOOLEAN
+);
+

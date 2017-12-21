@@ -1,1 +1,5 @@
-INSERT INTO STOCK (brand, name, quantity) VALUES ('Philips', 'Item2', 3);
+INSERT INTO STOCK (BRAND, NAME, QUANTITY) VALUES ('Philips', 'Item2', 3);
+
+INSERT INTO PRINCIPAL (USER, PASSWORD, IS_ADMIN) VALUES ('admin', 'admin', true);
+INSERT INTO PRINCIPAL (USER, PASSWORD, IS_ADMIN) VALUES ('user', 'user', false);
+

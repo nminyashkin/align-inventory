@@ -8,6 +8,7 @@ import com.align.inventory.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,31 +27,37 @@ public class InventoryController {
     @Autowired
     private InventoryService inventoryService;
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping(value = "/findAll")
     public List<Stock> findAll() {
         return inventoryService.findAll();
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping(value = "/findByBrand/{brand}")
     public List<Stock> findByBrand(@PathVariable String brand) {
         return inventoryService.findByBrand(brand);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping(value = "/findByName/{name}")
     public List<Stock> findByName(@PathVariable String name) {
         return inventoryService.findByName(name);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping(value = "/findByBrandAndName/{brand}/{name}")
     public List<Stock> findByBrandAndName(@PathVariable String brand, @PathVariable String name) {
         return inventoryService.findByBrandAndName(brand, name);
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping(value = "/findLiftovers")
     public List<Stock> findLiftovers() {
         return inventoryService.findLiftovers();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = "/add/{brand}/{name}/{quantity}")
     public Stock add(
             @PathVariable String brand,
@@ -60,6 +67,7 @@ public class InventoryController {
         return inventoryService.add(brand, name, quantity);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = "/update/{id}/{brand}/{name}/{quantity}")
     public ResponseEntity update(
             @PathVariable Integer id,
@@ -77,6 +85,7 @@ public class InventoryController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(value = "/delete/{id}")
     public ResponseEntity delete(@PathVariable Integer id) {
 
