@@ -16,11 +16,17 @@ As RESTful implementation was not required, service has not "root" endpoint with
 Service endpoints are:
 
 http://localhost:9000/inventory/findByBrand/{brand}
+
 http://localhost:9000/inventory/findByName/{name}
+
 http://localhost:9000/inventory/findByBrandAndName/{brand}/{name}
+
 http://localhost:9000/inventory/findLiftovers
+
 http://localhost:9000/inventory/add/{brand}/{name}/{quantity}
+
 http://localhost:9000/inventory/update/{id}/{brand}/{name}/{quantity}
+
 http://localhost:9000/inventory/delete/{id}
 
 I hope endpoint URIs are self-describing
