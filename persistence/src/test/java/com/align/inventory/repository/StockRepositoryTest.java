@@ -1,6 +1,6 @@
 package com.align.inventory.repository;
 
-import com.align.inventory.RepositoryConfiguration;
+import com.align.inventory.config.RepositoryConfiguration;
 import com.align.inventory.model.Stock;
 import org.junit.Before;
 import org.junit.Test;

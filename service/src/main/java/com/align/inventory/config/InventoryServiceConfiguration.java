@@ -1,6 +1,5 @@
 package com.align.inventory.config;
 
-import com.align.inventory.RepositoryConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 

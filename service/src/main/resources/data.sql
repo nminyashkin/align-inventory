@@ -1,1 +1,1 @@
-INSERT INTO STOCK (id, brand, name, quantity) VALUES (1, 'Philips', 'Item2', 5);
+INSERT INTO STOCK (brand, name, quantity) VALUES ('Philips', 'Item2', 3);
