@@ -1,0 +1,8 @@
+dependencies {
+    compile project(":persistence-core")
+
+    compile 'org.hamcrest:hamcrest-junit'
+    compile 'junit:junit'
+    compile "com.h2database:h2"
+
+}

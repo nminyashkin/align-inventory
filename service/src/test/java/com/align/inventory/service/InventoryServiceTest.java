@@ -1,15 +1,17 @@
-package com.align.inventory.repository;
+package com.align.inventory.service;
 
-import com.align.inventory.config.RepositoryConfiguration;
+import com.align.inventory.exception.InventoryException;
 import com.align.inventory.model.Stock;
+import com.align.inventory.repository.StockRepository;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static com.align.inventory.test.InventoryTestUtils.verifyStocks;
@@ -22,22 +24,29 @@ import static com.align.inventory.test.TestStocks.stock2;
 import static com.align.inventory.test.TestStocks.stock3;
 import static com.align.inventory.test.TestStocks.stock4;
 import static com.align.inventory.test.TestStocks.stock5;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.junit.MatcherAssert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
- * @author Nikolay Minyashkin (nminyashkin@mail.ru) Created on 18/12/17.
+ * @author Nikolay Minyashkin (nminyashkin@mail.ru) Created on 21/12/17.
  */
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {
-        RepositoryConfiguration.class
+        InventoryServiceTestConfiguration.class
 })
-public class StockRepositoryTest {
+public class InventoryServiceTest {
 
     @Autowired
     private StockRepository stockRepository;
+
+    @Autowired
+    private InventoryService inventoryService;
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Before
     public void prepareTestData() {
@@ -52,59 +61,70 @@ public class StockRepositoryTest {
 
     @Test
     public void testFindByBrand() {
-        List<Stock> stocks = stockRepository.findByBrand("Philips");
+        List<Stock> stocks = inventoryService.findByBrand("Philips");
         verifyStocks(stocks, expectedFoundByBrand);
     }
 
     @Test
     public void testFindByName() {
-        List<Stock> stocks = stockRepository.findByName("TV 1000");
+        List<Stock> stocks = inventoryService.findByName("TV 1000");
         verifyStocks(stocks, expectedFoundByName);
     }
 
     @Test
     public void testFindByBrandAndName() {
-        List<Stock> stocks = stockRepository.findByBrandAndName("Panasonic", "TV 1000");
+        List<Stock> stocks = inventoryService.findByBrandAndName("Panasonic", "TV 1000");
         verifyStocks(stocks, expectedFoundByBrandAndName);
     }
 
     @Test
     public void testFindLiftovers() {
-        List<Stock> stocks = stockRepository.findLiftovers();
+        List<Stock> stocks = inventoryService.findLiftovers();
         verifyStocks(stocks, expectedLiftovers);
-
     }
 
     @Test
-    public void testSave() {
-        Stock newStock = new Stock("New brand", "New name", 15);
-        stockRepository.save(newStock);
-        List<Stock> stocks = stockRepository.findByBrandAndName("New brand", "New name");
-        verifyStocks(stocks, Arrays.asList(newStock));
+    public void testAdd() {
+        Stock newStock = inventoryService.add("New brand", "New name", 15);
+        Stock foundStock = stockRepository.findOne(newStock.getId());
+        assertThat(foundStock.getBrand(), is("New brand"));
+        assertThat(foundStock.getName(), is("New name"));
+        assertThat(foundStock.getQuantity(), is(15));
     }
 
     @Test
-    public void testUpdate() {
+    public void testUpdateExisted() throws InventoryException {
         Stock stock = stockRepository.findByExample(stock1);
         int stockId = stock.getId();
-        stock.setBrand("Updated brand");
-        stock.setName("Updated name");
-        stock.setQuantity(100);
-        stockRepository.save(stock);
+        inventoryService.update(stockId, "Updated brand", "Updated name", 100);
 
         Stock foundUpdatedStock = stockRepository.findOne(stockId);
-        assertThat(foundUpdatedStock, is(stock));
+        assertThat(foundUpdatedStock.getBrand(), is("Updated brand"));
+        assertThat(foundUpdatedStock.getName(), is("Updated name"));
+        assertThat(foundUpdatedStock.getQuantity(), is(100));
     }
 
-    // Actually this test is not necessary as we're testing Spring JPA repository but not our functionality
     @Test
-    public void testDelete() {
+    public void testUpdateNotExisted() throws InventoryException {
+        thrown.expect(InventoryException.class);
+        thrown.expectMessage(containsString(" not found"));
+        inventoryService.update(-1, "Updated brand", "Updated name", 100);
+    }
+
+    @Test
+    public void testDeleteExisted() throws InventoryException {
         Stock stock = stockRepository.findByExample(stock1);
         int stockId = stock.getId();
-        stockRepository.delete(stock);
+        inventoryService.delete(stockId);
 
         Stock foundStock = stockRepository.findOne(stockId);
         assertThat(foundStock, is(nullValue()));
     }
 
+    @Test
+    public void testDeleteNotExisted() throws InventoryException {
+        thrown.expect(InventoryException.class);
+        thrown.expectMessage(containsString(" not found"));
+        inventoryService.delete(-1);
+    }
 }

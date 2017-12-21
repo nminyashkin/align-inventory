@@ -1,9 +1,11 @@
 dependencies {
+    compile project(":persistence-core")
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
 
+    testCompile project(":persistence-test")
     testCompile 'org.springframework:spring-test'
     testCompile 'org.hamcrest:hamcrest-junit'
     testCompile 'junit:junit'
-    testCompile 'org.hsqldb:hsqldb'
+    testCompile "com.h2database:h2"
 
 }

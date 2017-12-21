@@ -13,4 +13,11 @@ dependencies {
     compile "org.springframework.boot:spring-boot-actuator"
 
     compile "com.h2database:h2"
+
+    testCompile project(":persistence-test")
+
+    testCompile 'org.springframework:spring-test'
+    testCompile 'org.hamcrest:hamcrest-junit'
+    testCompile 'junit:junit'
+
 }
