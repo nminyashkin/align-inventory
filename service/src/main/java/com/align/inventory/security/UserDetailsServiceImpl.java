@@ -23,7 +23,6 @@ import static java.text.MessageFormat.format;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-
     private GrantedAuthority ROLE_USER = new SimpleGrantedAuthority("ROLE_USER");
     private GrantedAuthority ROLE_ADMIN = new SimpleGrantedAuthority("ROLE_ADMIN");
 
@@ -34,6 +33,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private PrincipalRepository principalRepository;
 
+    // TODO We need cache principals fetched from database
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return Optional.of(principalRepository.findOne(username))
