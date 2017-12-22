@@ -11,24 +11,24 @@ Admin user: admin/admin
 Ordinal user: user/user
 
 ## remarks
-As RESTful implementation was not required, service has not "root" endpoint with links to servoce resources
+As RESTful implementation was not required, service has not "root" endpoint with links to service resources
 
 ## endpoints
 Service endpoints are:
 
-http://localhost:9000/inventory/findByBrand/{brand}
+http://localhost:9000/inventory/findByBrand/{brand} (GET HTTP method expected)
 
-http://localhost:9000/inventory/findByName/{name}
+http://localhost:9000/inventory/findByName/{name} (GET HTTP method expected)
 
-http://localhost:9000/inventory/findByBrandAndName/{brand}/{name}
+http://localhost:9000/inventory/findByBrandAndName/{brand}/{name} (GET HTTP method expected)
 
-http://localhost:9000/inventory/findLiftovers
+http://localhost:9000/inventory/findLiftovers (GET HTTP method expected)
 
-http://localhost:9000/inventory/add/{brand}/{name}/{quantity}
+http://localhost:9000/inventory/add/{brand}/{name}/{quantity} (POST HTTP method expected)
 
-http://localhost:9000/inventory/update/{id}/{brand}/{name}/{quantity}
+http://localhost:9000/inventory/update/{id}/{brand}/{name}/{quantity} (POST HTTP method expected)
 
-http://localhost:9000/inventory/delete/{id}
+http://localhost:9000/inventory/delete/{id} (POST HTTP method expected)
 
 I hope endpoint URIs are self-describing
 

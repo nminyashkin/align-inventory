@@ -26,14 +26,9 @@ buildscript {
 subprojects {
     def springBomVersion = "Brussels-SR5"
     def springBootVersion = "1.5.9.RELEASE"
-//    def springCloudBomVersion = "Dalston.SR4"
 
-    def logbackVersion = "1.2.3"
-    def jacksonVersion = "2.8.9"
-
-    ext {
-
-    }
+//    def logbackVersion = "1.2.3"
+//    def jacksonVersion = "2.8.9"
 
     apply plugin: "java"
     apply plugin: "io.spring.dependency-management"
@@ -55,7 +50,6 @@ subprojects {
         dependencies {
 //            dependency "commons-io:commons-io:2.5"
             dependency "org.apache.commons:commons-lang3:3.5"
-
             dependency "org.projectlombok:lombok:1.16.18"
 
 //            dependency "ch.qos.logback:logback-classic:${logbackVersion}"
