@@ -1,0 +1,169 @@
+Вывести список установленных пакетов:
+dpkg --get-selections
+
+Вывести список кешированных ppa-репозиториев:
+apt-cache policy
+
+Узнать версию linux:
+cat /etc/*-release
+
+Каталог установки java: /usr/lib/jvm/java-8-oracle/jre
+
+Найти файл:
+find -name "<имя файла>"
+
+Подсчитать рекурсивно количество файлов в каталоге:
+find <DIR> -type f | wc -l
+
+Найти текст в файлах в текущем каталоге:
+grep -n *.* -e "Authentication failed: "
+
+Найти текст в файлах по маске рекурсивно:
+find . -name "*.groovy" -type f -exec grep -l "RestTemplate" {} +
+
+Найти файл в архиве:
+for f in *.jar; do echo "$f: "; unzip -l $f | grep -i 'ResourceEditor.class'; done
+
+Посчитать размер каталога:
+du -sh <file_path>
+
+Сгенерировать Liferay portet на Spring Portlet MVC:
+mvn archetype:generate -DarchetypeGroupId=com.liferay.maven.archetypes -DarchetypeArtifactId=liferay-portlet-spring-mvc-archetype -DarchetypeVersion=6.2.10.15 -DgroupId=ru.test -DartifactId=spring-portlet-mvc
+mvn archetype:generate -DarchetypeGroupId=com.liferay.maven.archetypes -DarchetypeArtifactId=liferay-portlet-spring-mvc-freemarker-archetype -DarchetypeVersion=1.0-SNAPSHOT -DgroupId=ru.test -DartifactId=spring-portlet-freemarker
+
+Скопировать файлы через ssh:
+scp -r filestore-admin-portlets.war ccadmin@<host>:/home/ccadmin
+
+Скопировать логи с таера через ssh:
+scp ccdeveloper@<host>:/home/ccdeveloper/file_store_1.2/*.* /home/nick/temp
+
+Зайти по ssh:
+ssh -l ccadmin <host>
+ssh ccadmin@<host>
+
+Найти процесс Netbeans:
+ps -A -f | grep netbeans
+
+Создать линк к команде:
+sudo update-alternatives --install /usr/bin/gradle gradle /home/nick/Programs/gradle-4.3.1/bin/gradle 0
+
+Создать контейнер на основе image и выполнить команду:
+docker run -t -i --name=crypto-pro-ubuntu ubuntu /bin/bash
+
+Создать контейнер на основе image (с портами):
+docker run --name splunk -d -p 8000:8000 -p 8088:8088 -p 8089:8089 -p 8191:8191 -p 9997:9997  outcoldman/splunk
+docker run --name splunk -d -p 8000:8000 -p 8088:8088 -p 8089:8089 -p 8191:8191 -p 9997:9997 -v /home/nick/docker-mounted/splunk:/opt/splunk outcoldman/splunk 
+
+Войти в контейнер:
+docker exec -it [container-id] bash
+docker exec -it [container-id] /bin/sh
+
+Скопировать файлы из контейнера в локальный каталог:
+docker cp splunk:/opt/splunk /home/nick/docker-mounted/splunk
+	
+Скопировать файлы из локального каталога в контейнер:
+docker cp . splunk:/home/splunk/test-data
+
+Получить IP адрес
+docker inspect --format {{.NetworkSettings.IPAddress}} cassandra-test
+
+Логи docker-контейнеров:
+/var/lib/docker/containers/
+
+Собрать сервис и опубликовать Docker image:
+./gradlew -i clean build -x test dockerBuild dockerPush -Drevision=Test3
+
+Найти установленный пакет:
+dpkg --get-selections | grep docker
+
+установить Ansible:
+1. распаковать архив
+2. sudo -E make install
+
+либо:
+sudo apt-get install ansible
+
+Задеплоить используя Ansible:
+ansible-playbook -u ccadmin -k playbooks/test-filestore-service.yaml
+
+Найти текст в файле: 
+grep "<some text>" *.*
+
+Установить RPM package:
+1. sudo alien packagename.rpm
+2. sudo dpkg -i packagename.deb
+
+watch -n 1 docker ps -a
+
+Установить docker-compose:
+В корне <compose-1.6.0>:
+python setup.py build
+sudo python setup.py install
+
+--parallel --max-workers 2
+
+ssh-keygen -t rsa -C ccadmin
+ssh-copy-id ccadmin@<host>
+
+cd /etc/mounted/share
+sudo mount -t vboxsf share .
+
+Смонтироваить диск в каталог:
+
+
+Размонтировать каталог:
+umount /mnt
+
+Splunk:
+index = "filestore" severity = "ERROR" message.ext.Exception = "*data too long*"
+index = businessoperations message.System=FileStore message.Message=Started  "message.Action" != readFile "message.ext.ClientSystem" = skr | table message.ext.DocumentKey, message.ext.ClientSystem
+
+Посчитать кол-во строк в файле:
+wc -l skr_middle.csv
+
+Убрать виндовые переводы строк:
+sed $'s/\r//' 2007.txt > 2007.linux.txt
+
+Добавить текст в конец каждой строки:
+sed -u 's/$/;guru/' 2013.linux.txt > GURU.2013.csv
+
+Убрать все строки "DOCUID;guru":
+sed -i.bak '/DOCUID;guru/d' ./GURU.2013.csv
+
+Отсортировать строки в файле:
+sort united.csv > united.sorted.csv
+
+Удалить все дубликаты из файла (строки должны быть отсортированы):
+uniq -u united.sorted.csv > united.unique.csv
+
+Запустить cqlsh с коннектом к GURU PROD:
+./cqlsh -u cassandra -p cassandra -k docstore 10.222.0.50
+
+Получить адрес host-машины из docker-контейнера:
+/sbin/ip route|awk '/default/ { print $3 }'
+
+Войти в локальную базу mysql:
+mysql -uroot -proot mainstore_service
+
+Посмотреть размер каталога:
+du -sh
+
+Посмотреть размер всех дисков:
+df -h
+ 
+ansible-playbook -v -i hosts/inventory -l <env> playbooks/deploy-service.yaml --extra-vars '{"inventory_hostname":"10.199.50.100", "soapui_home":"/home/nick/SmartBear/SoapUI-5.2.1"}'
+
+./gradlew -i dockerBuild publish dockerPush filestore-deployment:build -x test -i -DisRelease=true -Dbuild=l-test.1
+
+
+https://currentmillis.com/
+
+Выполнить сложную команду в контейнере:
+docker run -d -p 8080:8080 --link bar-linked-container:linked1 --link bar-linked-container-2:linked2 --name bar-linking-test alpine:3.2 /bin/sh -c "ping linked1 -w1 && ping linked2 -w1"
+
+"deployer.*.local.inheritLogging=true”
+
+java -jar /home/nick/IdeaProjects/sandbox/spring-cloud-dataflow-samples-master/deps/spring-cloud-dataflow-server-local-1.2.3.RELEASE.jar -Dspring.datasource.platform=mysql -Dspring.datasource.url=jdbc:mysql://localhost:3308/scdf_server_storage -Dspring.datasource.username=root -Dspring.datasource.password=root -Dspring.datasource.driver-class-name=org.mariadb.jdbc.Driver 
+
+java -jar /home/nick/IdeaProjects/sandbox/spring-cloud-dataflow-samples-master/deps/spring-cloud-dataflow-shell-1.2.3.RELEASE.jar 
+
