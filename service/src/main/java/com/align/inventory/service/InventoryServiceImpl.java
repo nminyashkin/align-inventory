@@ -5,7 +5,6 @@ import com.align.inventory.model.Stock;
 import com.align.inventory.repository.StockRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
@@ -37,14 +36,12 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public List<Stock> findByBrandAndName(String brand, String name) {
+    public List<Stock> search(String brand, String name) {
 
         if (StringUtils.isBlank(brand)) {
             return stockRepository.findByName(name);
-
         } else if (StringUtils.isBlank(name)) {
             return stockRepository.findByBrand(brand);
-
         } else {
             return stockRepository.findByBrandAndName(brand, name);
         }
@@ -56,21 +53,20 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public Stock add(String brand, String name, Integer quantity) {
-        final Stock stock = new Stock(brand, name, quantity);
+    public Integer create(Stock stock) {
         Stock savedStock = stockRepository.save(stock);
-        return savedStock;
+        return savedStock.getId();
     }
 
     @Override
-    public void update(Integer id, String brand, String name, Integer quantity) throws InventoryException {
+    public void update(Integer id, Stock updatedStock) throws InventoryException {
         Stock stock = stockRepository.findOne(id);
 
         verifyStockExists(id, stock);
 
-        stock.setBrand(brand);
-        stock.setName(name);
-        stock.setQuantity(quantity);
+        stock.setBrand(updatedStock.getBrand());
+        stock.setName(updatedStock.getName());
+        stock.setQuantity(updatedStock.getQuantity());
 
         stockRepository.save(stock);
     }
@@ -87,7 +83,4 @@ public class InventoryServiceImpl implements InventoryService {
             throw new InventoryException(MessageFormat.format("Stock with id {0} not found", id));
         }
     }
-
-
-
 }

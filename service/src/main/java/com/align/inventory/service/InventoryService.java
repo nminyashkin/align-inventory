@@ -15,15 +15,13 @@ public interface InventoryService {
 
     List<Stock> findByName(String name);
 
-    List<Stock> findByBrandAndName(String brand, String name);
+    List<Stock> search(String brand, String name);
 
     List<Stock> findLiftovers();
 
-    // We must return created stock as client might need it's ID
-    Stock add(String brand, String name, Integer quantity);
+    Integer create(Stock stock);
 
-    void update(Integer id, String brand, String name, Integer quantity) throws InventoryException;
+    void update(Integer id, Stock stock) throws InventoryException;
 
     void delete(Integer id) throws InventoryException;
-
 }

@@ -39,5 +39,4 @@ public class Stock {
 
     @NonNull
     private Integer quantity;
-
 }

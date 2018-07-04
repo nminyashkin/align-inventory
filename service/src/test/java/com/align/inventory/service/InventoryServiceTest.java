@@ -73,7 +73,7 @@ public class InventoryServiceTest {
 
     @Test
     public void testFindByBrandAndName() {
-        List<Stock> stocks = inventoryService.findByBrandAndName("Panasonic", "TV 1000");
+        List<Stock> stocks = inventoryService.search("Panasonic", "TV 1000");
         verifyStocks(stocks, expectedFoundByBrandAndName);
     }
 
@@ -85,7 +85,7 @@ public class InventoryServiceTest {
 
     @Test
     public void testAdd() {
-        Stock newStock = inventoryService.add("New brand", "New name", 15);
+        Stock newStock = inventoryService.create("New brand", "New name", 15);
         Stock foundStock = stockRepository.findOne(newStock.getId());
         assertThat(foundStock.getBrand(), is("New brand"));
         assertThat(foundStock.getName(), is("New name"));

@@ -1,7 +1,4 @@
 repositories {
-//    maven { url 'http://artifactory.rgs.ru:8081/artifactory/remote-repos' }
-//    maven { url "http://artifactory.rgs.ru:8081/artifactory/jcenter-cache" }
-//    maven { url 'http://artifactory.rgs.ru:8081/artifactory/gradle' }
     jcenter()
 }
 
@@ -11,9 +8,6 @@ buildscript {
     }
 
     repositories {
-//        maven { url "http://artifactory.rgs.ru:8081/artifactory/gradle" }
-//        maven { url "http://artifactory.rgs.ru:8081/artifactory/remote-repos" }
-//        maven { url "http://artifactory.rgs.ru:8081/artifactory/third-party-proprietary" }
         jcenter()
     }
 
@@ -27,16 +21,12 @@ subprojects {
     def springBomVersion = "Brussels-SR5"
     def springBootVersion = "1.5.9.RELEASE"
 
-//    def logbackVersion = "1.2.3"
-//    def jacksonVersion = "2.8.9"
+    def logbackVersion = "1.2.3"
 
     apply plugin: "java"
     apply plugin: "io.spring.dependency-management"
 
     repositories {
-//            maven { url 'http://artifactory.rgs.ru:8081/artifactory/remote-repos' }
-//            maven { url "http://artifactory.rgs.ru:8081/artifactory/jcenter-cache" }
-//            maven { url 'http://artifactory.rgs.ru:8081/artifactory/gradle' }
         jcenter()
     }
 
@@ -48,13 +38,13 @@ subprojects {
         }
 
         dependencies {
-//            dependency "commons-io:commons-io:2.5"
+            dependency "commons-io:commons-io:2.5"
             dependency "org.apache.commons:commons-lang3:3.5"
             dependency "org.projectlombok:lombok:1.16.18"
 
-//            dependency "ch.qos.logback:logback-classic:${logbackVersion}"
-//            dependency "ch.qos.logback:logback-core:${logbackVersion}"
-//            dependency "org.slf4j:jcl-over-slf4j:1.7.25"
+            dependency "ch.qos.logback:logback-classic:${logbackVersion}"
+            dependency "ch.qos.logback:logback-core:${logbackVersion}"
+            dependency "org.slf4j:jcl-over-slf4j:1.7.25"
 
             dependency "com.h2database:h2:1.4.194"
 
@@ -67,5 +57,4 @@ subprojects {
         compileOnly "org.projectlombok:lombok" // compilation-level, non-transitive
         testCompile "org.projectlombok:lombok" // test-only
     }
-
 }

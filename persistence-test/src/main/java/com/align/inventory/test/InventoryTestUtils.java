@@ -18,5 +18,4 @@ public class InventoryTestUtils {
         stocks.sort(Comparator.comparing(stock -> stock.getId()));
         assertThat(stocks, is(expectedFoundByBrand));
     }
-
 }

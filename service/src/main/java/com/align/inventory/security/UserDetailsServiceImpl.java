@@ -43,8 +43,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     private UserDetails createUser(Principal principal) {
-        Collection<GrantedAuthority> authorities = principal.isAdmin() ? adminAuthorities :userAuthorities;
+        Collection<GrantedAuthority> authorities = principal.isAdmin() ? adminAuthorities : userAuthorities;
         return new User(principal.getUser(), principal.getPassword(), authorities);
     }
-
 }

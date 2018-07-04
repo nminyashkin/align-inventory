@@ -72,7 +72,6 @@ public class StockRepositoryTest {
     public void testFindLiftovers() {
         List<Stock> stocks = stockRepository.findLiftovers();
         verifyStocks(stocks, expectedLiftovers);
-
     }
 
     @Test
@@ -106,5 +105,4 @@ public class StockRepositoryTest {
         Stock foundStock = stockRepository.findOne(stockId);
         assertThat(foundStock, is(nullValue()));
     }
-
 }

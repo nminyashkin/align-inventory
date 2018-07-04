@@ -7,5 +7,4 @@ dependencies {
     testCompile 'org.hamcrest:hamcrest-junit'
     testCompile 'junit:junit'
     testCompile "com.h2database:h2"
-
 }

@@ -35,6 +35,4 @@ public interface StockRepository extends JpaRepository<Stock, Integer> {
     default Stock findByExample(Stock example) {
         return findByBrandAndNameAndQuantity(example.getBrand(), example.getName(), example.getQuantity());
     }
-
-
 }

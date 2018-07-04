@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
  * @author Nikolay Minyashkin (nminyashkin@mail.ru) Created on 21/12/17.
  */
 @Repository
-public interface PrincipalRepository extends JpaRepository<Principal, String>{
+public interface PrincipalRepository extends JpaRepository<Principal, String> {
 
 }
